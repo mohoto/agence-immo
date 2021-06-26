@@ -1,16 +1,60 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+:root {
+  --main-color: #3f51b5;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
+.globalImg {
+  width: 100%;
+  height: auto;
 }
-
-* {
-  box-sizing: border-box;
+.globalColor {
+  color: var(--main-color);
+}
+.globalButton {
+  border-radius: 20px;
+  background-color: var(--main-color);
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  font-size: 15px;
+}
+.globalButton:hover {
+  opacity: 0.8;
+}
+.globalButton:focus {
+  outline: none;
+}
+.card {
+  box-shadow: none !important;
+}
+.description {
+  white-space: pre-line;
+}
+@media screen and (min-width: 768px) {
+  .globalImg {
+    width: 100%;
+    height: 250px;
+  }
+  .carouselMain {
+    height: 430px;
+  }
+  .carouselItem {
+    transform: translate(0%, -30%);
+  }
+  .myCarousel {
+    width: 100%;
+  }
+  .carousel-image {
+    width: 100%;
+    height: 400px;
+    display: block;
+  }
+}
+@media (max-width: 768px) {
+  .myCarousel {
+    width: 100%;
+  }
+  .carousel-image {
+    width: 100%;
+    height: 300px;
+    display: block;
+  }
 }
