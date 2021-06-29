@@ -2,20 +2,18 @@
 
 import React from "react";
 import { MDBContainer, MDBDataTableV5, MDBIcon, MDBView } from "mdbreact";
-import { AdminRoute } from "../../auth/adminRoutes";
-import { Layout } from "../../components/layout";
-import useSWR from "swr";
-import api from "../../auth/axios";
+//import { AdminRoute } from "../../auth/adminRoutes";
 import Moment from "react-moment";
-import { priceFormatted } from "../../components/helpers";
-import useAuth from "../../auth/context";
-import axios from "axios"
+import { priceFormatted } from "../components/Helpers";
+//import useAuth from "../../auth/context";
+import Image from 'next/image'
+import {useGetProperties} from '../utilities/useRequest'
 
-const fetcher = (url) => axios.get(url).then((res) => res.data.data);
 
 const PropertyList = () => {
-  const { user } = useAuth();
-  const { data: properties } = useSWR("/api/properties?limit=30", fetcher);
+  //const { user } = useAuth();
+  const { properties, error } = useGetProperties();
+  console.log('properties:', properties)
 
   const styles = {
     forcedInline: {
@@ -80,21 +78,21 @@ const PropertyList = () => {
     ],
     rows:
       properties &&
-      properties.map((property) => {
+      properties.data.map((property) => {
         return {
           title: property.title,
           description: <div>{property.description.slice(0, 200)}</div>,
           price: priceFormatted(property.price),
           category: property.category.name,
           pictures: property && (
-            <MDBView hover zoom waves>
-              <img
+            {/* <MDBView hover zoom waves>
+              <Image
                 src={property.pictures[0]}
                 alt="Premier slide"
                 width={120}
                 height={80}
               />
-            </MDBView>
+            </MDBView> */}
           ),
           sold:
             (property.sold === false && (
@@ -134,8 +132,7 @@ const PropertyList = () => {
 
   return (
     <>
-      {user && user.role === "admin" && (
-        <Layout>
+           
           <MDBContainer fluid>
             <MDBDataTableV5
               hover
@@ -150,10 +147,10 @@ const PropertyList = () => {
               searchBottom={false}
             />
           </MDBContainer>
-        </Layout>
-      )}
+     
     </>
   );
 };
 
-export default AdminRoute(PropertyList);
+//export default AdminRoute(PropertyList);
+export default PropertyList;

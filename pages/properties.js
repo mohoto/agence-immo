@@ -4,6 +4,7 @@ import Card from '../components/Card'
 import {MDBContainer} from 'mdbreact'
 import {useRouter} from 'next/router'
 import ReactPaginate from 'react-paginate'
+import SearchFilter from '../components/Property/SearchFilter'
 
 
 export default function Properties({properties, currentPage, pageCount}) {
@@ -16,6 +17,7 @@ export default function Properties({properties, currentPage, pageCount}) {
 
     return (
         <>
+        <SearchFilter />
         <MDBContainer>
           <h2 className="h1-responsive font-weight-bold text-center my-5">
             Liste des biens
